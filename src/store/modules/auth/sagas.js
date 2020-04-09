@@ -1,5 +1,6 @@
 import { all, takeLatest, call, put } from 'redux-saga/effects';
 import api from '../../../services/api';
+import { getData } from '../../../services/apifake';
 import { signInSuccess, signFailure, signUpSuccess } from './actions';
 import history from '../../../services/history';
 import { toast } from 'react-toastify';
@@ -24,28 +25,7 @@ export function* signIn({ payload }){
     //   }
     // )
 
-    function getData(success){
-      return new Promise((resolve, reject)=> {
-        setTimeout(() => {
-          if(success){
-            resolve({
-              data: {
-                token: 'jkhuisehrseufhsufhilushfldshulfhshlkfhlksdhlfhlksdhlfhkljsdlkfjdlsfjlk',
-                user: {
-                  provider: true,
-                  nome: 'maria',
-                  email: email
-                }
-              }
-            })
-          }else{
-            reject('ASDASDAS')
-          }
-        }, 5000);
-      });
-    }
-
-    const response = yield call(getData, true);
+    const response = yield call(getData, true, '/login');
 
     const { token, user } = response.data;
 

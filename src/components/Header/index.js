@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Container, Content, Profile } from './styles';
+import { store } from '../../store';
 import logo from '../../assets/logo-purple.svg';
 import Notifications from '../Notifications';
 
 export default function Header() {
+
+  const [ user, setUser ] = useState({});
+
+  useEffect(()=> {
+    const { profile } = store.getState().user;
+
+    setUser(profile)
+  }, [])
+
   return (
     <Container>
       <Content>
@@ -17,7 +27,7 @@ export default function Header() {
           <Notifications />
           <Profile>
             <div>
-              <strong>Leonardo Rodrigues</strong>
+              <strong>{user.nome}</strong>
               <Link to='/profile'>Meu Perfil</Link>
             </div>
             <img
