@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { Container, Content, Profile } from './styles';
-import { store } from '../../store';
+import { useSelector } from 'react-redux';
 import logo from '../../assets/logo-purple.svg';
 import Notifications from '../Notifications';
 
 export default function Header() {
 
-  const [ user, setUser ] = useState({});
-
-  useEffect(()=> {
-    const { profile } = store.getState().user;
-
-    setUser(profile)
-  }, [])
+  const { profile } = useSelector(state => state.user)
 
   return (
     <Container>
@@ -27,11 +21,11 @@ export default function Header() {
           <Notifications />
           <Profile>
             <div>
-              <strong>{user.nome}</strong>
+              <strong>{profile.nome}</strong>
               <Link to='/profile'>Meu Perfil</Link>
             </div>
             <img
-              src="https://api.adorable.io/avatars/50/abott@adorable.png"
+              src={profile.avatar.url || "imagem default"}
               alt="Diego Fernandes"
             />
           </Profile>

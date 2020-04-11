@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 // css permite adicionar css condicional
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { lighten } from 'polished';
+import { lighten, darken } from 'polished';
 export const Container = styled.div`
   position: relative;
 `;
@@ -22,8 +22,7 @@ export const Badge = styled.button`
       content:'';
       border-radius: 50%;
     }
-  `
-  }
+  `}
 `;
 
 export const NotificationList = styled.div`

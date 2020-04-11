@@ -1,4 +1,4 @@
-export function getData(success, operationType){
+export function getData(success, operationType, data){
     
     const delay = 5000;
 
@@ -9,11 +9,14 @@ export function getData(success, operationType){
                 if(success){
                     resolve({
                     data: {
-                        token: 'jkhuisehrseufhsufhilushfldshulfhshlkfhlksdhlfhlksdhlfhkljsdlkfjdlsfjlk',
-                        user: {
-                        provider: true,
-                        nome: 'Leonardo Rodrigues',
-                        email: 'lalalal@lalala.com'
+                            token: 'jkhuisehrseufhsufhilushfldshulfhshlkfhlksdhlfhlksdhlfhkljsdlkfjdlsfjlk',
+                            user: {
+                            provider: true,
+                            nome: 'Leonardo Rodrigues',
+                            email: 'lalalal@lalala.com',
+                            avatar: {
+                                url: 'https://api.adorable.io/avatars/50/abott@adorable.png'
+                            }
                         }
                     }
                     })
@@ -26,7 +29,8 @@ export function getData(success, operationType){
             return new Promise((resolve, reject)=> {
                 setTimeout(() => {
                 if(success){
-                    resolve({ data : [
+                    resolve({ 
+                        data : [
                         {
                                 
                                 read: true,
@@ -71,6 +75,55 @@ export function getData(success, operationType){
                 }
                 }, delay);
             });
+
+            case '/users' :
+                return new Promise((resolve, reject)=> {
+                    setTimeout(() => {
+                    if(success){
+
+                        const { nome, email, ...rest } = data;
+
+                        resolve({
+                        data: {
+                            user: Object.assign( { nome, email }, rest, { avatar: { url: 'https://api.adorable.io/avatars/50/abott@adorable.png', id: 1} })
+                        }
+                        })
+
+                    }else{
+                        reject('Update Error')
+                    }
+                    }, delay);
+                });
+
+            case '/schedule' :
+                return new Promise((resolve, reject)=> {
+                    setTimeout(() => {
+                    if(success){
+                        resolve([
+                            {
+                                    
+                                user: {
+                                    name: 'Leonardo',
+                                },
+                                date: '2020-04-11T13:00:00.000Z',
+                            
+                                
+                            },
+                            {
+                                
+                                user: {
+                                    name: 'Maria',
+                                },
+                                date: '2020-04-11T14:00:00.000Z',
+                                
+                            }          
+                        ])
+                    }else{
+                        reject('Update Error')
+                    }
+                    }, delay);
+                });
+        
         default:
     }    
 
